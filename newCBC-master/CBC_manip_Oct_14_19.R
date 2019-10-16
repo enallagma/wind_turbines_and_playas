@@ -1,15 +1,16 @@
-##From R, download Master Zip file and save to computer
-## setwd to location that files have been downloaded to
-setwd("/Users/EzraAuerbach/Desktop/birddata/")
+# Required R package - dplyr
+install.packages("dplyr")
+library(dplyr)
 
-# List the files that are found within the pathway listed above
-list.files()
+# Download the bird data spreadsheet from Github and read as a CSV
+CBCcircles<- read.csv("https://github.com/enallagma/wind_turbines_and_playas/newCBC-master/cbcs.csv")
 
-##Load CBC file from computer directory
+# Load CBC data 
 cbc<-read.csv("cbcs.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE) 
 
-# Begin Reading in files,Due to data structure of some files, each is loaded in manually
-# to confirm proper data structure
+# Begin reading in files. Due to data structure of some files, each is loaded in manually
+# for proper data structure
+# npt = Northern Pintail, shc = Sandhill Crane, nsh = Northern Shoveler
 npt84 <- read.csv("npt84.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt85 <- read.csv("npt85.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt86 <- read.csv("npt86.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
@@ -83,7 +84,6 @@ shc15 <- read.csv("shc2015.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE
 shc16 <- read.csv("shc2016.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 shc17 <- read.csv("shc2017.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 
-
 nsh84 <- read.csv("nsh1984.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 nsh85 <- read.csv("nsh1985.csv", header=TRUE, stringsAsFactors = TRUE)
 nsh86 <- read.csv("nsh1986.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
@@ -120,61 +120,48 @@ nsh14 <- read.csv("nsh2014.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE
 nsh15 <- read.csv("nsh2015.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 nsh16 <- read.csv("nsh2016.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 
-
-#Combine all Northern Pintail data into one dataframe named NPTData
+# Combine all Northern Pintail data into one dataframe named NPTData
 NPTData<- rbind(npt84, npt85, npt86, npt86, npt88, npt89, 
                 npt90, npt91, npt92, npt93, npt94, npt95, npt96, npt97, npt98, npt99, 
                 npt00, npt01, npt02, npt03, npt04, npt05, npt06, npt07, npt08, npt09, 
                 npt10, npt11, npt12, npt13, npt14, npt15, npt16)
 
-#Combine all Northern Shoveler data into one dataframe named NSHData
-
-NSHData<- rbind(nsh84, nsh85, nsh86, nsh87, nsh88, nsh89,
-                nsh90, nsh91, nsh92, nsh93, nsh94, nsh95, nsh96, nsh97, nsh98, nsh99, 
-                nsh00, nsh01, nsh02, nsh03, nsh04, nsh05, nsh06, nsh07, nsh08, nsh09, 
-                nsh10, nsh11, nsh12, nsh13, nsh14, nsh15, nsh16)
-
-#Combine all Sandhill Crane data into one dataframe namned SHCData
+# Combine all Sandhill Crane data into one dataframe named SHCData
 SHCData<- rbind(shc84, shc85, shc86, shc86, shc88, shc89, 
                 shc90, shc91, shc92, shc93, shc94, shc95, shc96, shc97, shc98, shc99, 
                 shc00, shc01, shc02, shc03, shc04, shc05, shc06, shc07, shc08, shc09, 
                 shc10, shc11, shc12, shc13, shc14, shc15, shc16)
 
-#Within each data frame create a column "bird" and fill it with the given three letter code
+# Combine all Northern Shoveler data into one dataframe named NSHData
+NSHData<- rbind(nsh84, nsh85, nsh86, nsh87, nsh88, nsh89,
+                nsh90, nsh91, nsh92, nsh93, nsh94, nsh95, nsh96, nsh97, nsh98, nsh99, 
+                nsh00, nsh01, nsh02, nsh03, nsh04, nsh05, nsh06, nsh07, nsh08, nsh09, 
+                nsh10, nsh11, nsh12, nsh13, nsh14, nsh15, nsh16)
+
+# Within each dataframe create a column "bird" and fill it with the given three letter code
 NPTData$bird<- c("NPT")
 NSHData$bird<- c("NSH")
 SHCData$bird<- c("SHC")
 
-# Delete column 8 within these two data frames as they contain Editors notes which are not required
+# Delete column 8 within these two dataframes because they contain Editors notes, which are not required
 SHCData<- SHCData[-c(8)]
 NPTData<- NPTData[-c(8)]
 NSHData<- NSHData[-c(8)]
 
-# Combine all data frames together to create one large data frame named AllBirdData 
+# Combine all dataframes to create one large dataframe named AllBirdData 
 AllBirdData<- rbind(SHCData, NPTData, NSHData)
 
-library(dplyr)
-
-# Download the complete spreadsheet from Github and read as a CSV
-urlfile<- "https://raw.githubusercontent.com/eauerbach13/newCBC/master/CompleteBirdData.csv"
-CBCcircles<- read.csv("https://raw.githubusercontent.com/eauerbach13/newCBC/master/cbcs.csv")
-
-# Delete columns 3-5 because they contain the Latitude, Longitude, and Number Observed which are not required for this project
+# Delete columns 3-5 because they contain Latitude, Longitude, and Number Observed, which are not required 
 AllBirdData<- AllBirdData [-c(3,4,5)]
-AllBirdData
-# # Using inner_join from "dplyr" we can combine the two spreadsheets of CBCcircles and BirdData
-# inner_join will take the first spreadsheet as the basis and combine only rows from the second spreadsheet
-# that contain the same data, in this instance specifically the Name of the CBC is being compared, and only 
-# those that are found within both spreadsheets will be combined to make a new spreadsheet "BirdData_CBC"
+
+# Use inner_join from dplyr ton combine the CBCcircles and AllBirdData spreadsheets; 
+# inner_join will take the first spreadsheet and combine only rows from the second spreadsheet
+# that contain the same data, in this instance specifically the name of the CBC circle, and only 
+# those that are found within both spreadsheets will be combined to make a new spreadsheet called 
+# BirdData_CBC
 BirdData_CBC<- inner_join(CBCcircles, AllBirdData)
 
-BirdData_CBC
-#Filter and create three new data frames, one for each species
+# Filter and create three new data frames, one for each species
 SHC_CBC <- filter(BirdData_CBC, bird== "SHC")
-
 NSH_CBC <- filter(BirdData_CBC, bird== "NSH")
-
 NPT_CBC <- filter(BirdData_CBC, bird== "NPT")
-
-NPT_CBC
-
