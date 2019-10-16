@@ -1,11 +1,2 @@
 # newCBC
-CBC data with new scripts
-
-
-All data within this repository has been collected from http://netapp.audubon.org/cbcobservation/
-From this step click on Current Year, and Count by Species
-Designate the year and species which you are collecting data for, and save as a given format.
-
-The previous steps have been followed for each of Sandhill Crane, Northern Shoveler, and Northern Pintail from the years 1984 to 2016.
-
-For Example, Year "1984", Species "Sandhill Crane"
+Bird data - see newCBC-master folder. In it, an R script (3.6.1) was built to query the CBC bird data from http://netapp.audubon.org/cbcobservation/, click on Current Year, and Count by Species. Designate the year and species for which you are collecting data, and save. This was done to compile data for Sandhill Crane, Northern Shoveler, and Northern Pintail from the years 1984 to 2016 (for example, Year "1984", Species "Sandhill Crane").
