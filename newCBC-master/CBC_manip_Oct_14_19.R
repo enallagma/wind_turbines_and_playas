@@ -1,16 +1,16 @@
+# First must download all of the CBC data spreadsheets (.csv files) from Github
+# and then set the working directory to that download location.
+# npt = Northern Pintail, shc = Sandhill Crane, nsh = Northern Shoveler
+# cbcs.csv has three columns: JV, STATE, and Name. JV = PLJV = Playa Lakes 
+# Joint Venture (indicating our focal area). STATE = U.S. state where
+# a given CBC circle is located. Name = name of the CBC circle.
+
 # Required R package - dplyr
 install.packages("dplyr")
 library(dplyr)
 
-# Download the bird data spreadsheet from Github and read as a CSV
-CBCcircles<- read.csv("https://github.com/enallagma/wind_turbines_and_playas/newCBC-master/cbcs.csv")
-
-# Load CBC data 
-cbc<-read.csv("cbcs.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE) 
-
 # Begin reading in files. Due to data structure of some files, each is loaded in manually
 # for proper data structure
-# npt = Northern Pintail, shc = Sandhill Crane, nsh = Northern Shoveler
 npt84 <- read.csv("npt84.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt85 <- read.csv("npt85.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt86 <- read.csv("npt86.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
@@ -153,6 +153,8 @@ AllBirdData<- rbind(SHCData, NPTData, NSHData)
 
 # Delete columns 3-5 because they contain Latitude, Longitude, and Number Observed, which are not required 
 AllBirdData<- AllBirdData [-c(3,4,5)]
+
+CBCcircles<- read.csv("https://github.com/enallagma/wind_turbines_and_playas/newCBC-master/cbcs.csv")
 
 # Use inner_join from dplyr ton combine the CBCcircles and AllBirdData spreadsheets; 
 # inner_join will take the first spreadsheet and combine only rows from the second spreadsheet
