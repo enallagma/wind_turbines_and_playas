@@ -1,5 +1,9 @@
-# First must download all of the CBC data spreadsheets (.csv files) from Github
+# This is R code to extract CBC data for each of the 3 focal species from
+# just our focal CBC circles.
+
+# First download all of the CBC data spreadsheets (.csv files) from Github
 # and then set the working directory to that download location.
+
 # npt = Northern Pintail, shc = Sandhill Crane, nsh = Northern Shoveler
 # cbcs.csv has three columns: JV, STATE, and Name. JV = PLJV = Playa Lakes 
 # Joint Venture (indicating our focal area). STATE = U.S. state where
@@ -9,8 +13,8 @@
 install.packages("dplyr")
 library(dplyr)
 
-# Begin reading in files. Due to data structure of some files, each is loaded in manually
-# for proper data structure
+# Begin reading in files. Due to data structure of some files, each is loaded 
+# in manually:
 npt84 <- read.csv("npt84.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt85 <- read.csv("npt85.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
 npt86 <- read.csv("npt86.csv", fill=TRUE, header=TRUE, stringsAsFactors = TRUE)
