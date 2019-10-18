@@ -142,12 +142,12 @@ NSHData<- rbind(nsh84, nsh85, nsh86, nsh87, nsh88, nsh89,
                 nsh00, nsh01, nsh02, nsh03, nsh04, nsh05, nsh06, nsh07, nsh08, nsh09, 
                 nsh10, nsh11, nsh12, nsh13, nsh14, nsh15, nsh16)
 
-# Within each dataframe create a column "bird" and fill it with the given three letter code
+# Within each dataframe create a column "bird" and populate with the appropriate 3-letter code
 NPTData$bird<- c("NPT")
 NSHData$bird<- c("NSH")
 SHCData$bird<- c("SHC")
 
-# Delete column 8 within these two dataframes because they contain Editors notes, which are not required
+# Delete column 8 within the dataframes because they contain Editors notes, which are not required
 SHCData<- SHCData[-c(8)]
 NPTData<- NPTData[-c(8)]
 NSHData<- NSHData[-c(8)]
