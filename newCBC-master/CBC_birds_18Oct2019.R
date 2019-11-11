@@ -1,6 +1,6 @@
 # Last updated: 7 November 2019
 
-setwd("C:/Users/nmcintyr/Desktop/win7_previous/mcintyre_desktop/Nancy's stuff/wind turbines and playas/wind_turbine_ms/newCBC-master")
+setwd("SET YOUR OWN WORKING DIRECTORY HERE")
 
 # This is R code to extract CBC data for each of the 3 focal species from
 # just our focal CBC circles.
