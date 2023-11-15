@@ -1,5 +1,6 @@
 # wind_turbines_and_playas
-repository for data on our project identifying which playas are in close proximity to wind turbines
+repository for data on our project identifying which playas are in close proximity to wind turbines:
+Heintzman, L.J., E.S. Auerbach, D.H. Kilborn, S.M. Starr, K.R. Mulligan, L.S. Barbato, and N.E. McIntyre. 2020. Identifying areas of wetland and wind turbine overlap in the south-central Great Plains of North America. Landscape Ecology 35:1995-2011. https://doi.org/10.1007/s10980-020-01076-8
 
 Repository includes GIS layers of playa basins (from the Playa Lakes Joint Venture), Christmas Bird Count circles (National Audubon Society), Breeding Bird Survey routes (USGS), and wind turbine and associated ancillary structure locations (Federal Aviation Administration).
 
